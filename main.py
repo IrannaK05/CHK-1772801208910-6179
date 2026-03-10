@@ -1,17 +1,17 @@
 import customtkinter as ctk
-from student import Student
+from Student import Student
 from PIL import Image
-from train import Train
-
+from Dashbord import SmartAttendanceDashboard
 import os
 
-# Import your other logic files (Make sure these .py files exist)
-# from face_recognition import Face_Recognition
-# from attendance import Attendance
-# from train import Train
+# Import other modules
+from Face_Recognition import Face_Recognition_UI
+from attendance import Attendance
+from Train import Train_UI
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
+
 
 class SmartAttendance:
 
@@ -21,7 +21,6 @@ class SmartAttendance:
         self.root.geometry("1300x750")
         self.root.title("Smart Attendance System")
 
-        # ===== Background Color =====
         root.configure(fg_color="#e6ecff")
 
         # ================= NAVBAR =================
@@ -60,7 +59,7 @@ class SmartAttendance:
                               hover_color="#3949ab")
         login.pack(side="right", padx=10)
 
-        # ================= HERO SECTION =================
+        # ================= HERO =================
 
         hero = ctk.CTkFrame(root, fg_color="transparent")
         hero.pack(pady=20)
@@ -120,7 +119,7 @@ class SmartAttendance:
                 hover_color="#1a237e",
                 font=("Arial", 15, "bold"),
                 width=200,
-                command=command # Linked the command here
+                command=command
             )
             btn.pack(pady=5)
 
@@ -133,39 +132,45 @@ class SmartAttendance:
             )
             description.pack(pady=10)
 
-        # ===== Cards with Functions Linked =====
+        # ===== CARDS =====
 
         create_card(0, 0, "Student Details",
                     "Add and manage student records.",
                     r"D:\Facial Recognition smart attendence system\Images\sd.png",
-                    "#e3f2fd", command=self.student_details)
+                    "#e3f2fd",
+                    command=lambda: self.open_page(Student))
 
         create_card(0, 1, "Face Detector",
                     "Detect and recognize student faces.",
                     r"D:\Facial Recognition smart attendence system\Images\fd.jpg",
-                    "#e3f2fd", command=self.face_data)
+                    "#e3f2fd",
+                    command=lambda: self.open_page(Face_Recognition_UI))
 
         create_card(0, 2, "Attendance",
                     "Mark attendance using face recognition.",
                     r"D:\Facial Recognition smart attendence system\Images\images.jpg",
-                    "#e3f2fd", command=self.attendance_data)
+                    "#e3f2fd",
+                    command=lambda: self.open_page(Attendance))
 
         create_card(1, 0, "Train Data",
                     "Train dataset for recognition system.",
                     r"D:\Facial Recognition smart attendence system\Images\train.jpg",
-                    "#e3f2fd", command=self.train_data)
+                    "#e3f2fd",
+                    command=lambda: self.open_page(Train_UI))
 
         create_card(1, 1, "Photos",
                     "Manage captured student photos.",
                     r"D:\Facial Recognition smart attendence system\Images\img3.jpg",
-                    "#e3f2fd", command=self.open_img)
+                    "#e3f2fd",
+                    command=self.open_img)
 
         create_card(1, 2, "Dashboard",
                     "Show percentage of student attendance.",
                     r"D:\Facial Recognition smart attendence system\Images\dash.jpg",
-                    "#e3f2fd")
+                    "#e3f2fd",
+                    command=lambda: self.open_page(SmartAttendanceDashboard))
 
-        # ================= EXIT BUTTON =================
+        # ================= EXIT =================
 
         exit_btn = ctk.CTkButton(
             root,
@@ -179,27 +184,31 @@ class SmartAttendance:
 
         exit_btn.pack(pady=20)
 
-    # ================= FUNCTION BUTTONS =================
+    # ================= UNIVERSAL PAGE OPEN FUNCTION =================
 
-    def student_details(self):
-        self.new_window = ctk.CTkToplevel(self.root)
-        self.app = Student(self.new_window)
+    def open_page(self, page_class):
 
-    def face_data(self):
-        self.new_window = ctk.CTkToplevel(self.root)
-        # self.app = Face_Recognition(self.new_window)
+        new_window = ctk.CTkToplevel(self.root)
 
-    def attendance_data(self):
-        self.new_window = ctk.CTkToplevel(self.root)
-        # self.app = Attendance(self.new_window)
+        new_window.lift()
+        new_window.focus()
+        new_window.attributes("-topmost", True)
 
-    def train_data(self):
-        self.new_window = ctk.CTkToplevel(self.root)
-        self.app = Train(self.new_window)
+        new_window.after(200, lambda: new_window.attributes("-topmost", False))
+
+        page_class(new_window)
+
+    # ================= OPEN PHOTO FOLDER =================
 
     def open_img(self):
-        os.startfile(r"D:\Facial Recognition smart attendence system\data")
-    
+
+        path = r"D:\Iranna\Facial Recognition smart attendence system\Photo"
+
+        if os.path.exists(path):
+            os.startfile(path)
+        else:
+            print("Photos folder not found")
+
 
 # ================= MAIN =================
 
