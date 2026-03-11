@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from Student import Student
 from PIL import Image
-from Dashbord import SmartAttendanceDashboard
+from Dashbord import Dashboard
 import os
 
 # Import other modules
