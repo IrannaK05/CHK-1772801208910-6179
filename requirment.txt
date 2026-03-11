@@ -1,0 +1,30 @@
+Python 3.13.12
+mysql  Ver 8.0.35 for Win64 on x86_64 (MySQL Community Server - GPL)
+VsCode 
+
+
+
+babel                  2.18.0
+contourpy              1.3.3
+customtkinter          5.2.2
+cycler                 0.12.1
+darkdetect             0.8.0
+fonttools              4.62.0
+future                 1.0.0
+kiwisolver             1.5.0
+matplotlib             3.10.8
+mysql-connector        2.2.9
+mysql-connector-python 9.6.0
+numpy                  2.4.3
+opencv-contrib-python  4.13.0.92
+opencv-python          4.13.0.92
+packaging              26.0
+pandas                 3.0.1
+pillow                 12.1.1
+pip                    25.3
+pyparsing              3.3.2
+python-dateutil        2.9.0.post0
+six                    1.17.0
+tkcalendar             1.6.1
+tkintertable           1.3.3
+tzdata                 2025.3
